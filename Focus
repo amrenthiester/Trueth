@@ -1,0 +1,26 @@
+ for (var i = 0; i < data.columns.length; i++){
+                        if (data.columns[i].editor && data.columns[i].editor.xtype == 'combo'){
+                            data.columns[i].width = 130;
+                            var store = new Ext.data.JsonStore(
+                            {
+                                fields: ['rowId','name'],
+                                proxy: proxy,
+                                baseParams: { listId: data.columns[i].editor.listId },
+                                idProperty: 'rowId',
+                                root: 'records',
+                                autoLoad: true
+                            });
+                            data.columns[i].editor =  { 
+                                xtype: 'combo',
+                                typeAhead: true,
+                                lazyRender: true,
+                                triggerAction: 'all',
+                                store: store,
+                                mode: 'local', 
+                                displayField: 'name',
+                                valueField: 'rowId',
+                                editable: false,
+                                selectOnFocus:true
+                            }
+                        }
+                    }
